@@ -1,0 +1,8 @@
+*.tif
+*.tiff
+*.tif.aux.xml
+*.tiff.aux.xml
+*.ovr
+*.aux
+__pycache__/
+.ipynb_checkpoints/
