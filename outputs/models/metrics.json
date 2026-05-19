@@ -1,0 +1,53 @@
+{
+  "dataset": "/model_outputs/train_pixels.parquet",
+  "holdout_year_t": 2022,
+  "train_rows": 12661961,
+  "test_rows": 338132,
+  "features": [
+    "interval_years",
+    "red_t",
+    "nir_t",
+    "swir1_t",
+    "swir2_t",
+    "ndvi_t",
+    "ndmi_t",
+    "nbr_t",
+    "swir1_swir2_ratio_t",
+    "prev_interval_years",
+    "ndvi_prev",
+    "delta_ndvi_prev_to_t",
+    "nbr_prev",
+    "delta_nbr_prev_to_t"
+  ],
+  "use_location": false,
+  "use_year": false,
+  "roc_auc": 0.680842892790728,
+  "average_precision": 0.43917711430429707,
+  "classification_report_threshold_0_5": {
+    "0": {
+      "precision": 0.8270377822490499,
+      "recall": 0.7293680180126894,
+      "f1-score": 0.7751383449729596,
+      "support": 253599.0
+    },
+    "1": {
+      "precision": 0.4004996418650967,
+      "recall": 0.542391728674009,
+      "f1-score": 0.46076928874707934,
+      "support": 84533.0
+    },
+    "accuracy": 0.6826239456780192,
+    "macro avg": {
+      "precision": 0.6137687120570733,
+      "recall": 0.6358798733433492,
+      "f1-score": 0.6179538168600195,
+      "support": 338132.0
+    },
+    "weighted avg": {
+      "precision": 0.7204032471530616,
+      "recall": 0.6826239456780192,
+      "f1-score": 0.6965460809164896,
+      "support": 338132.0
+    }
+  }
+}

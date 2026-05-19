@@ -1,0 +1,16 @@
+[
+  "interval_years",
+  "red_t",
+  "nir_t",
+  "swir1_t",
+  "swir2_t",
+  "ndvi_t",
+  "ndmi_t",
+  "nbr_t",
+  "swir1_swir2_ratio_t",
+  "prev_interval_years",
+  "ndvi_prev",
+  "delta_ndvi_prev_to_t",
+  "nbr_prev",
+  "delta_nbr_prev_to_t"
+]

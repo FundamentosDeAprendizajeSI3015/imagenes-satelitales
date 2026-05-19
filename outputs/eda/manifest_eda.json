@@ -1,0 +1,24 @@
+{
+  "data_dir": "/home/saur/Documents/aux",
+  "out_dir": "/home/saur/Documents/aux/eda_outputs",
+  "years": [
+    2014,
+    2015,
+    2017,
+    2018,
+    2020,
+    2021,
+    2023
+  ],
+  "band_names": [
+    "red",
+    "nir",
+    "swir1",
+    "swir2",
+    "ndvi"
+  ],
+  "forest_ndvi_threshold": 0.65,
+  "loss_ndvi_threshold": 0.45,
+  "min_ndvi_drop": -0.2,
+  "pixel_area_ha_assumption": 0.36
+}

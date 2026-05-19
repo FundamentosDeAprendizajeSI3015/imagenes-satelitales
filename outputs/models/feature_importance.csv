@@ -1,0 +1,15 @@
+feature,importance
+ndmi_t,3995
+swir1_swir2_ratio_t,3978
+ndvi_prev,3947
+nbr_prev,3357
+ndvi_t,3355
+delta_ndvi_prev_to_t,3094
+red_t,3071
+nir_t,2782
+delta_nbr_prev_to_t,2675
+swir1_t,2402
+swir2_t,2045
+nbr_t,2004
+prev_interval_years,495
+interval_years,0

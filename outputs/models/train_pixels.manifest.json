@@ -1,0 +1,185 @@
+{
+  "dataset": "/model_outputs/train_pixels.parquet",
+  "years": [
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "negative_ratio": 3.0,
+  "forest_ndvi_threshold": 0.65,
+  "loss_ndvi_threshold": 0.45,
+  "min_ndvi_drop": -0.2,
+  "include_coords": false,
+  "pixel_area_ha": 0.36,
+  "pairs": [
+    {
+      "year_t": 2004,
+      "year_tp1": 2005,
+      "rows": 966533,
+      "positives": 241656,
+      "negatives": 724877,
+      "positive_rate": 0.25002353773745956
+    },
+    {
+      "year_t": 2005,
+      "year_tp1": 2006,
+      "rows": 957684,
+      "positives": 239421,
+      "negatives": 718263,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2006,
+      "year_tp1": 2007,
+      "rows": 917224,
+      "positives": 229306,
+      "negatives": 687918,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2007,
+      "year_tp1": 2008,
+      "rows": 1645600,
+      "positives": 411400,
+      "negatives": 1234200,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2008,
+      "year_tp1": 2009,
+      "rows": 840013,
+      "positives": 210392,
+      "negatives": 629621,
+      "positive_rate": 0.25046279045681435
+    },
+    {
+      "year_t": 2009,
+      "year_tp1": 2010,
+      "rows": 1019580,
+      "positives": 254895,
+      "negatives": 764685,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2010,
+      "year_tp1": 2011,
+      "rows": 1530608,
+      "positives": 382652,
+      "negatives": 1147956,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2011,
+      "year_tp1": 2012,
+      "rows": 844620,
+      "positives": 211155,
+      "negatives": 633465,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2012,
+      "year_tp1": 2013,
+      "rows": 475452,
+      "positives": 118863,
+      "negatives": 356589,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2013,
+      "year_tp1": 2014,
+      "rows": 143760,
+      "positives": 35940,
+      "negatives": 107820,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2014,
+      "year_tp1": 2015,
+      "rows": 576499,
+      "positives": 144995,
+      "negatives": 431504,
+      "positive_rate": 0.25150954294803635
+    },
+    {
+      "year_t": 2015,
+      "year_tp1": 2016,
+      "rows": 300120,
+      "positives": 75030,
+      "negatives": 225090,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2016,
+      "year_tp1": 2017,
+      "rows": 371420,
+      "positives": 92855,
+      "negatives": 278565,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2017,
+      "year_tp1": 2018,
+      "rows": 268700,
+      "positives": 67175,
+      "negatives": 201525,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2018,
+      "year_tp1": 2019,
+      "rows": 464076,
+      "positives": 116019,
+      "negatives": 348057,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2019,
+      "year_tp1": 2020,
+      "rows": 214288,
+      "positives": 53572,
+      "negatives": 160716,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2020,
+      "year_tp1": 2021,
+      "rows": 514372,
+      "positives": 128593,
+      "negatives": 385779,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2021,
+      "year_tp1": 2022,
+      "rows": 611412,
+      "positives": 152853,
+      "negatives": 458559,
+      "positive_rate": 0.25
+    },
+    {
+      "year_t": 2022,
+      "year_tp1": 2023,
+      "rows": 338132,
+      "positives": 84533,
+      "negatives": 253599,
+      "positive_rate": 0.25
+    }
+  ]
+}
