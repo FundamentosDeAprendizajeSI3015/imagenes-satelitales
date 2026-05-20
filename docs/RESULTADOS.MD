@@ -198,7 +198,7 @@ Mapa raster generado para predicción 2023 → 2024.
                          ≈ 4,695,844 ha
 ```
 
-⚠️ **ADVERTENCIA: Esta estimación es INFLADA y NO CONFIABLE.**
+Esta estimación es inflada y no confiable.**
 
 Razones:
 1. Probabilidades no están calibradas (modelo entrenado en dataset balanceado)
@@ -279,15 +279,6 @@ calibrated_model = CalibratedClassifierCV(model, method='isotonic')
 - Arquitectura: LightGBM es tabular, no captura contexto espacial
 - Features: Principalmente espectrales; sin topografía, accesibilidad, etc.
 - Generalización: Válido para Antioquia; puede no aplicar a otras regiones
-
-### Soluciones Sugeridas
-
-- [ ] Incluir features geoespaciales (elevación, pendiente, distancia a carreteras)
-- [ ] Arquitectura CNN o Transformer para contexto espacial
-- [ ] Incorporar series temporales (LSTM)
-- [ ] Etiquetas más precisas (polígonos validados vs proxy NDVI)
-- [ ] Validación multi-regional
-
 ---
 
 ## Archivos de Referencia
