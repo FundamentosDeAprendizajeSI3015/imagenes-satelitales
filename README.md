@@ -241,14 +241,14 @@ Caída mínima:         ∆NDVI ≤ -0.20
 
 ## Guía de Documentación
 
-### 📄 [DATA.MD](docs/DATA.MD)
+###  [DATA.MD](docs/DATA.MD)
 Descripción de fuentes de datos, bandas espectrales, índices derivados, y validación de alineación temporal.
 
-### 📄 [WORKFLOW.MD](docs/WORKFLOW.MD)
-Overview de pasos de preprocessing y características generadas.
+### 📄 [EDA.MD](docs/RESULTADOS.MD)
+Análisis exploratorio de datos del modelo y conclusiones.
 
-### 📄 [PIPELINE.MD](docs/PIPELINE.MD)
-Guía técnica completa: definición del target, comandos bash, interpretación de output.
+### [PIPELINE.MD](docs/PIPELINE.MD)
+Descripción de la construcción del dataset supervisado y entrenamiento
 
 ### 📄 [RESULTADOS.MD](docs/RESULTADOS.MD)
 Análisis de resultados del modelo, métricas de validación, recomendaciones operacionales.
