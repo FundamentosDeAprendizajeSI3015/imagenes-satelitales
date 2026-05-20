@@ -1,12 +1,15 @@
 #!/usr/bin/env python
-"""Build a supervised pixel dataset for T+1 deforestation modeling.
+"""
+Construcción de dataset supervisado para modelado de deforestación T+1.
 
-Target definition:
-    y = 1 when a pixel is forest-like at T and becomes loss-like at T+1.
-    y = 0 when a pixel is forest-like at T and remains non-loss at T+1.
+Definición del target:
+    y = 1 cuando un píxel parece bosque en T y se convierte en pérdida en T+1.
+    y = 0 cuando un píxel parece bosque en T y permanece sin pérdida en T+1.
 
-This creates a *pixel-level* classifier dataset. Hectares are computed later by
-aggregating predictions: sum(probability * pixel_area_ha).
+Crea un dataset clasificador a nivel de píxel. Las hectáreas se calculan luego
+agregando predicciones: sum(probabilidad * área_píxel_ha).
+
+Código realizado con apoyo de herramientas de inteligencia artificial.
 """
 
 from __future__ import annotations

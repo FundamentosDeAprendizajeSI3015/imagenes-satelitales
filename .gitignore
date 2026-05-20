@@ -54,7 +54,7 @@ Thumbs.db
 *.zip
 *.tar.gz
 
-# Archivos de modelo (opcional - descomenta si quieres excluir)
+# Archivos de modelo 
 *.joblib
 *.pkl
 *.h5

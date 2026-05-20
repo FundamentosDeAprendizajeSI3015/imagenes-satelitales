@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Unified clustering analysis: PCA + K-means + spatial comparison."""
+"""
+Análisis unificado de clustering: PCA + K-means + comparación espacial.
+
+Código realizado con apoyo de herramientas de inteligencia artificial.
+"""
 
 import argparse
 import json
@@ -21,7 +25,7 @@ BAND_NAMES = ["red", "nir", "swir1", "swir2", "ndvi"]
 
 
 def safe_index(numerator, denominator):
-    """Compute spectral index safely."""
+    """Calcular índice espectral de forma segura."""
     return np.divide(numerator, denominator, 
                      where=denominator!=0, 
                      out=np.zeros_like(numerator, dtype=float))
@@ -32,8 +36,8 @@ def compute_ndvi(red, nir):
 
 
 def load_raster(raster_path: Path, sample_size: int = 50000):
-    """Load and sample raster data."""
-    print(f"[CLUSTER] Loading {raster_path.name}...", flush=True)
+    """Cargar y muestrear datos del raster."""
+    print(f"[CLUSTER] Cargando {raster_path.name}...", flush=True)
     with rasterio.open(raster_path) as src:
         data = src.read().astype(np.float32)
     
@@ -54,8 +58,8 @@ def load_raster(raster_path: Path, sample_size: int = 50000):
 
 
 def pca_analysis(X: np.ndarray, n_components: int = 2):
-    """Perform PCA."""
-    print(f"[CLUSTER] Performing PCA...", flush=True)
+    """Realizar PCA (análisis de componentes principales)."""
+    print(f"[CLUSTER] Ejecutando PCA...", flush=True)
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     pca = PCA(n_components=n_components)
@@ -66,8 +70,8 @@ def pca_analysis(X: np.ndarray, n_components: int = 2):
 
 
 def kmeans_analysis(X: np.ndarray, k_range: range = range(2, 9)):
-    """Test K-means for different k values."""
-    print(f"[CLUSTER] Testing K-means...", flush=True)
+    """Probar K-means para diferentes valores de k."""
+    print(f"[CLUSTER] Probando K-means...", flush=True)
     results = []
     for k in k_range:
         kmeans = KMeans(n_clusters=k, random_state=42, n_init=10, verbose=0)
@@ -86,7 +90,7 @@ def kmeans_analysis(X: np.ndarray, k_range: range = range(2, 9)):
 
 
 def save_pca_plot(X_pca, labels, explained_var, out_dir):
-    """Save PCA scatter plot."""
+    """Guardar gráfico de dispersión PCA."""
     fig, ax = plt.subplots(figsize=(10, 8))
     scatter = ax.scatter(X_pca[:, 0], X_pca[:, 1], c=labels, cmap='tab10', 
                         alpha=0.6, s=30, edgecolors='k', linewidth=0.5)
@@ -102,7 +106,7 @@ def save_pca_plot(X_pca, labels, explained_var, out_dir):
 
 
 def save_kmeans_plots(results, out_dir):
-    """Save K-means metrics plots."""
+    """Guardar gráficos de métricas de K-means."""
     k_values = [r['k'] for r in results]
     silhouette_scores = [r['silhouette'] for r in results]
     davies_bouldin_scores = [r['davies_bouldin'] for r in results]
@@ -155,7 +159,7 @@ def save_kmeans_plots(results, out_dir):
 
 
 def load_chunk(raster_path, row_start, col_start, chunk_size=512):
-    """Load a 512x512 chunk."""
+    """Cargar un bloque de 512×512 píxeles."""
     with rasterio.open(raster_path) as src:
         row_end = min(row_start + chunk_size, src.height)
         col_end = min(col_start + chunk_size, src.width)
@@ -171,7 +175,7 @@ def load_chunk(raster_path, row_start, col_start, chunk_size=512):
 
 
 def process_chunk(red, nir, swir1, swir2):
-    """Cluster a chunk."""
+    """Aplicar clustering a un bloque."""
     ndvi = compute_ndvi(red, nir)
     X = np.stack([red, nir, swir1, swir2], axis=-1)
     h, w = X.shape[:2]
@@ -205,7 +209,7 @@ def process_chunk(red, nir, swir1, swir2):
 
 
 def select_chunks(raster_path, num_chunks=6, chunk_size=512):
-    """Select strategic chunks."""
+    """Seleccionar bloques estratégicos."""
     with rasterio.open(raster_path) as src:
         height, width = src.height, src.width
     
@@ -226,7 +230,7 @@ def select_chunks(raster_path, num_chunks=6, chunk_size=512):
 
 
 def save_comparison_figure(year, chunks_data, out_dir):
-    """Save NDVI vs Clustering comparison."""
+    """Guardar figura de comparación NDVI vs Clustering."""
     out_dir.mkdir(parents=True, exist_ok=True)
     n_chunks = len(chunks_data)
     fig = plt.figure(figsize=(16, 3*n_chunks))
@@ -242,7 +246,7 @@ def save_comparison_figure(year, chunks_data, out_dir):
         ax_ndvi.axis('off')
         plt.colorbar(im_ndvi, ax=ax_ndvi, label='NDVI')
         
-        # Clustering
+        # Agrupamiento
         ax_cluster = fig.add_subplot(gs[idx, 1])
         cluster_display = np.where(cluster_map == -1, np.nan, cluster_map)
         colors_cluster = ['#2ecc71', '#3498db', '#e74c3c']
@@ -254,7 +258,7 @@ def save_comparison_figure(year, chunks_data, out_dir):
                    for i in range(3)]
         ax_cluster.legend(handles=handles, loc='upper right', fontsize=8)
         
-        # Stats
+        # Estadísticas
         ax_stats = fig.add_subplot(gs[idx, 2])
         ax_stats.axis('off')
         stats_text = (

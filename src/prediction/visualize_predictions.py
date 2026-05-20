@@ -1,4 +1,8 @@
-"""Streamlit app to visualize deforestation probability predictions."""
+"""
+Aplicación Streamlit para visualizar predicciones de probabilidad de deforestación.
+
+Código realizado con apoyo de herramientas de inteligencia artificial.
+"""
 
 import streamlit as st
 import numpy as np
@@ -13,12 +17,12 @@ st.set_page_config(page_title="Deforestation Risk Map", layout="wide")
 st.title("Deforestation Risk Prediction Map")
 st.markdown("Green = Low Risk | Red = High Risk")
 
-# Sidebar for file selection
+# Barra lateral para selección de archivos
 st.sidebar.header("Configuration")
 data_dir = st.sidebar.text_input("Data directory", value=".")
-model_dir = st.sidebar.text_input("Model output directory", value="model_outputs")
+model_dir = st.sidebar.text_input("Model output directory", value="outputs/models")
 
-# Find available prediction files
+# Buscar archivos de predicción disponibles
 model_path = Path(model_dir)
 if model_path.exists():
     prediction_files = sorted(model_path.glob("p_loss_*.tif"))
@@ -35,7 +39,7 @@ else:
     st.error(f"Model directory not found: {model_path}")
     st.stop()
 
-# Load the prediction raster
+# Cargar el raster de predicción
 @st.cache_data
 def load_raster(file_path):
     with rasterio.open(file_path) as src:
@@ -50,7 +54,7 @@ except Exception as e:
     st.error(f"Error loading raster: {e}")
     st.stop()
 
-# Get statistics
+# Obtener estadísticas
 valid_data = data[np.isfinite(data)]
 if len(valid_data) == 0:
     st.error("No valid data in raster")
@@ -64,7 +68,7 @@ st.sidebar.metric("Mean Probability", f"{valid_data.mean():.3f}")
 st.sidebar.metric("Median Probability", f"{np.median(valid_data):.3f}")
 st.sidebar.metric("Valid Pixels", f"{len(valid_data):,}")
 
-# Threshold slider
+# Control deslizante para el umbral
 threshold = st.sidebar.slider(
     "Risk threshold for highlighting",
     min_value=0.0,
@@ -74,15 +78,15 @@ threshold = st.sidebar.slider(
     help="Pixels above this probability will be shown as red"
 )
 
-# Create custom colormap: green to red
+# Crear colormap personalizado: verde a rojo
 colors = ['#2ecc71', '#f39c12', '#e74c3c']  # green, orange, red
 n_bins = 100
 cmap = LinearSegmentedColormap.from_list('green_red', colors, N=n_bins)
 
-# Create visualization
+# Crear visualización
 fig, axes = plt.subplots(1, 2, figsize=(16, 6))
 
-# Main map with custom colormap
+# Mapa principal con colormap personalizado
 ax1 = axes[0]
 im1 = ax1.imshow(data, cmap=cmap, vmin=0, vmax=1, aspect='auto')
 ax1.set_title(f"Deforestation Risk Map\n{selected_file.name}", fontsize=14, fontweight='bold')
@@ -91,7 +95,7 @@ ax1.set_ylabel("Row")
 cbar1 = plt.colorbar(im1, ax=ax1, label="Loss Probability")
 cbar1.set_label("Loss Probability", rotation=270, labelpad=20)
 
-# Mask map showing high risk areas
+# Mapa enmascarado mostrando áreas de alto riesgo
 ax2 = axes[1]
 high_risk = np.where(np.isfinite(data), data >= threshold, np.nan)
 im2 = ax2.imshow(high_risk, cmap='RdYlGn_r', vmin=0, vmax=1, aspect='auto')
@@ -103,7 +107,7 @@ cbar2 = plt.colorbar(im2, ax=ax2, label="Risk Level")
 plt.tight_layout()
 st.pyplot(fig)
 
-# Statistics section
+# Sección de estadísticas
 col1, col2, col3, col4 = st.columns(4)
 
 high_risk_count = np.sum(valid_data >= threshold)
@@ -127,7 +131,7 @@ with col4:
     st.metric("CRS", str(crs) if crs else "Unknown")
     st.metric("Shape", f"{data.shape[0]:,} x {data.shape[1]:,}")
 
-# Histogram
+# Histograma
 st.subheader("Probability Distribution")
 fig_hist, ax_hist = plt.subplots(figsize=(12, 4))
 ax_hist.hist(valid_data, bins=50, color='#3498db', edgecolor='black', alpha=0.7)
@@ -140,7 +144,7 @@ ax_hist.legend()
 ax_hist.grid(alpha=0.3)
 st.pyplot(fig_hist)
 
-# Quantile breakdown
+# Desglose por cuantiles
 st.subheader("Risk Quantiles")
 quantiles = [0, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.99, 1.0]
 quantile_values = np.quantile(valid_data, quantiles)
@@ -150,7 +154,7 @@ quantile_df = pd.DataFrame({
 })
 st.dataframe(quantile_df, use_container_width=True)
 
-# File info
+# Información del archivo
 st.sidebar.markdown("---")
 st.sidebar.subheader("File Information")
 st.sidebar.text(f"File: {selected_file.name}")

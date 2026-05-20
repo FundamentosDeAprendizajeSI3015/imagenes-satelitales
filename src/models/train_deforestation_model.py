@@ -1,12 +1,15 @@
 #!/usr/bin/env python
-"""Train a supervised T+1 deforestation classifier.
+"""
+Entrenamiento de un clasificador supervisado de deforestación T+1.
 
-Recommended workflow:
-    1. Build pixel samples with build_supervised_dataset.py.
-    2. Train with a temporal holdout, usually the latest available pair.
+Flujo recomendado:
+    1. Construir muestras de píxeles con build_supervised_dataset.py.
+    2. Entrenar con validación temporal, usualmente el par más reciente disponible.
 
-The model predicts pixel-level loss probability. Area estimates are obtained by
-aggregating probabilities: sum(p_loss * pixel_area_ha).
+El modelo predice probabilidad de pérdida a nivel de píxel. Las estimaciones de área
+se obtienen agregando probabilidades: sum(p_pérdida * área_píxel_ha).
+
+Código realizado con apoyo de herramientas de inteligencia artificial.
 """
 
 from __future__ import annotations

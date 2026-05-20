@@ -1,8 +1,12 @@
 #!/usr/bin/env python
-"""Apply a trained T+1 deforestation model to a full raster year.
+"""
+Aplicar un modelo de deforestación T+1 entrenado a un raster completo.
 
-The output is a one-band GeoTIFF with pixel-level loss probability for pixels
-that are forest-like at T. Non-forest or invalid pixels are written as NaN.
+La salida es un GeoTIFF de una banda con probabilidad de pérdida a nivel de píxel
+para píxeles que parecen bosque en T. Los píxeles que no son bosque o inválidos
+se escriben como NaN.
+
+Código realizado con apoyo de herramientas de inteligencia artificial.
 """
 
 from __future__ import annotations
@@ -22,7 +26,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-from build_supervised_dataset import BAND_NAMES, make_features, selected_rows_cols
+from src.data.build_supervised_dataset import BAND_NAMES, make_features, selected_rows_cols
 
 
 def find_rasters(data_dir: Path) -> dict[int, Path]:
