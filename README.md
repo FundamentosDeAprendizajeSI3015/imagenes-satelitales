@@ -2,6 +2,7 @@
 
 **Proyecto Final - Fundamentos de Aprendizaje Profundo**  
 *Semestre VII - EAFIT*
+Esteban Alvarez, Sebastián Uribe, Miguel Mercado, Sebastián Durán
 
 ## Descripción General
 
@@ -63,10 +64,7 @@ ProyectoFinal/
 │   ├── data/
 │   │   └── build_supervised_dataset.py     # Construcción de dataset
 │   ├── analysis/
-│   │   ├── clustering_pca_analysis.py      # PCA + K-means
-│   │   ├── compare_chunk_clustering.py     # Comparación NDVI vs clustering
-│   │   ├── spatial_clustering_map.py       # Mapeo espacial de clusters
-│   │   └── clustering_analysis_unified.py  # Pipeline unificado (RECOMENDADO)
+│   │   └── clustering_analysis.py  # Pipeline unificado de clustering
 │   ├── models/
 │   │   └── train_deforestation_model.py    # Entrenamiento del modelo
 │   └── prediction/
@@ -108,16 +106,9 @@ ProyectoFinal/
 
 ### 1. Análisis Exploratorio de Datos (EDA)
 
-```bash
-python eda_outputs/eda_report.py
-```
+Se realizó un análisis exploratorio de datos detallado en DATA.MD.
 
-**Salida:**
-- `eda_outputs/band_stats.csv` — Estadísticas por banda
-- `eda_outputs/metadata.csv` — Información temporal y geoespacial
-- `eda_outputs/eda_report.md` — Reporte completo
-
-### 2. Análisis de Clustering (RECOMENDADO: Script Unificado)
+### 2. Análisis de Clustering
 
 ```bash
 python src/analysis/clustering_analysis_unified.py \
@@ -264,104 +255,3 @@ Análisis de resultados del modelo, métricas de validación, recomendaciones op
 
 ---
 
-## Tips Prácticos
-
-### Ejecución Rápida (Prueba)
-
-```bash
-# Clustering en muestra pequeña
-python src/analysis/clustering_analysis_unified.py \
-  --sample-size 10000 --num-chunks 3
-
-# Dataset con máximo de filas
-python src/data/build_supervised_dataset.py \
-  --max-rows 500000
-
-# Entrenamiento con pocos árboles
-python src/models/train_deforestation_model.py \
-  --max-rows 200000 --n-estimators 100
-```
-
-### Depuración
-
-```bash
-# Ver estructura de raster
-python -c "import rasterio; src=rasterio.open('raw_data/antioquia_2023.tif'); print(src.shape, src.crs, src.bounds)"
-
-# Inspeccionar Parquet
-python -c "import pandas as pd; df=pd.read_parquet('model_outputs/train_pixels.parquet', columns=['target_loss','ndvi_t']); print(df.head(), df['target_loss'].value_counts())"
-```
-
-### Ajuste de Parámetros
-
-**Para mayor Recall (encontrar más positivos):**
-```bash
-python src/models/train_deforestation_model.py \
-  --learning-rate 0.08 --n-estimators 800
-```
-
-**Para mayor Precisión (menos falsos positivos):**
-```bash
-# En visualización, usar threshold más alto (0.6-0.7)
-```
-
----
-
-## Solución de Problemas
-
-| Error | Solución |
-|-------|----------|
-| `FileNotFoundError: antioquia_*.tif` | Verificar que los rasters estén en `raw_data/` |
-| `ImportError: No module named 'rasterio'` | `pip install rasterio` (puede requerir GDAL del sistema) |
-| `MemoryError` durante PCA | Reducir `--sample-size` o procesar en chunks |
-| Predicción lenta | Usar `--max-rows` en entrenamiento para modelo más pequeño |
-| Métricas muy bajas | Validar definición del target proxy (NDVI thresholds) |
-
----
-
-## Contribuciones y Mejoras Futuras
-
-- [ ] Integración con etiquetas oficiales (Hansen, MapBiomas)
-- [ ] Calibración de probabilidades (Platt scaling, isotonic regression)
-- [ ] Modelos con redes neuronales (CNN para contexto espacial)
-- [ ] Análisis de cambios multi-temporales (series de tiempo)
-- [ ] Validación con datos de campo
-- [ ] API REST para predicción en tiempo real
-
----
-
-## Licencia
-
-Proyecto académico - Todos los derechos reservados.
-
----
-
-## Contacto
-
-**Autor:** Sebastián (EAFIT)  
-**Semestre:** VII  
-**Curso:** Fundamentos de Aprendizaje Profundo  
-**Fecha:** Mayo 2026
-
-Para preguntas sobre el código o metodología, revisar la [documentación técnica](docs/).
-
----
-
-## Resumen Rápido de Comandos
-
-```bash
-# 1. Análisis
-python src/analysis/clustering_analysis_unified.py --year 2023
-
-# 2. Dataset
-python src/data/build_supervised_dataset.py
-
-# 3. Entrenamiento
-python src/models/train_deforestation_model.py --holdout-year-t 2021
-
-# 4. Predicción
-python src/prediction/predict_deforestation_map.py --year-t 2023
-
-# 5. Visualización
-streamlit run src/prediction/visualize_predictions.py
-```
