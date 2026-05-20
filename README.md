@@ -1,6 +1,6 @@
-# Predicción de Deforestación T+1 con Aprendizaje Profundo
+# Predicción de Deforestación T+1 con Aprendizaje Automático
 
-**Proyecto Final - Fundamentos de Aprendizaje Profundo**  
+**Proyecto Final - Fundamentos de Aprendizaje Automático**  
 *Semestre VII - EAFIT*
 Esteban Alvarez, Sebastián Uribe, Miguel Mercado, Sebastián Durán
 
